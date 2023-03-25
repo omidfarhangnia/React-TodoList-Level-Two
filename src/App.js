@@ -1,5 +1,5 @@
-import FormTodoAdd from "./FormTodoAdd";
-import ShowTodoWorks from "./ShowTodoWorks";
+
+import "./App.scss";
 
 export const style = {
   bg: ``,
@@ -11,7 +11,7 @@ export const style = {
 export default function App() {
   return (
     <div className="todoContainer p-5 d-flex flex-column">
-        
+
     </div>
   );
 }
