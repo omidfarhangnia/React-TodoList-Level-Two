@@ -77,3 +77,50 @@ $mainFont: 'Roboto', sans-serif;
     min-width: 100px;
     min-height: 50px;
 }
+
+.taskAdderContainer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $mainBlack;
+    form{
+        width: 80%;
+        gap: 1.5rem;
+    }
+    label{
+        background: #181818;
+        width: 100%;
+        color: #ffffff;
+        padding: .5rem;
+        font-family: $mainFont;
+        text-transform: capitalize;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    input,
+    textarea{
+        // all: unset;
+        padding: 5px 10px;
+        font-size: .9rem;
+        text-transform: lowercase;
+        border: {
+            right: 1px solid #ffffff;
+            left: 1px solid #ffffff;
+        }
+    }
+    input[type="color"]{
+        width: 25%;
+        height: 30px;
+        border: 0;
+    }
+    input[type="checkbox"]{
+        border: 0;
+        width: 20px;
+        height: 20px;
+        outline: 0;
+        background-color: green;
+    }
+}

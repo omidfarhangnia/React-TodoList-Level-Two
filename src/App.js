@@ -15,7 +15,7 @@ export const style = {
       "text-uppercase font-roboto text-mainBlack bg-mainBlue rounded-pill m-0",
     date: "text-mainBlue font-roboto",
   },
-  addBtn: "position-absolute border-0 colorFul__btn",
+  addBtn: "border-0 colorFul__btn",
 };
 
 let currentDate;
@@ -26,43 +26,66 @@ if (typeof window !== "undefined") {
   }`;
 }
 
-let currentId = 1;
+let currentId = 3;
 const initialValue = [
   {
     id: 0,
-    name: "",
-    description: "",
+    name: "home works",
+    description: "hello i am here to say something i want to do my home works",
     priority: "#ffffff",
-    energyCosts: [false, false, false],
+    energyCosts: [true, true, true],
+  },
+  {
+    id: 1,
+    name: "making dinner",
+    description: "oh my god i want to make dinner what do you prefer tonight",
+    priority: "#555555",
+    energyCosts: [true, false, false],
+  },
+  {
+    id: 2,
+    name: "going gym",
+    description: "i go to sport gym but i want to try something new",
+    priority: "#000000",
+    energyCosts: [true, true, false],
   },
 ];
 
 export default function App() {
+  const [tasks, setTasks] =  useState(initialValue);
   const [newValues, setNewValues] = useState({
     name: "",
     description: "",
-    priority: "#000000",
-    energyCosts: {
-      energyCost0: false,
-      energyCost1: false,
-      energyCost2: false,
-    },
+    priority: "#ffffff",
+    energyCosts: [false, false, false]
   });
 
+  console.log(newValues.energyCosts)
+
+
   function handleNewValue(target) {
-    if(target.type === "checkbox"){
-      setNewValues({
-        ...newValues,
-        [target.name]: {
-          ...newValues.energyCosts,
-          [target.id]: target.checked
+    if (target.type === "checkbox") {
+      let newCheckBoxValue = [];
+      for(var i = 1; i <= 3; i++){
+        if(i <= Number(target.id)){
+          newCheckBoxValue.push(true)
+        }else{
+          newCheckBoxValue.push(false)
         }
-      })
-    }else{
+      }
+
+      console.log(target.id)
+      console.log(newCheckBoxValue)
+
       setNewValues({
         ...newValues,
-        [target.name]: target.value
-      })
+        [target.name]: newCheckBoxValue
+      });
+    } else {
+      setNewValues({
+        ...newValues,
+        [target.name]: target.value,
+      });
     }
   }
 
@@ -70,15 +93,15 @@ export default function App() {
     <div className={`todoContainer ${style.container}`}>
       <HeaderSection />
       {/* it will give a button which show current task */}
-      <CurrentTask />
+      {/* <CurrentTask /> */}
       {/* it will give a list of all the uncompleted tasks */}
-      <BackLogs />
+      {/* <BackLogs /> */}
       {/* it will give a list of all the completed tasks*/}
-      <CompletedTasks />
+      {/* <CompletedTasks /> */}
       {/* it will give a button which can delete all tasks*/}
-      <CleanUpTasks />
+      {/* <CleanUpTasks /> */}
       {/* you can use this for adding task to project */}
-      <AddButton />
+      <AddNewTask />
       {/* this is the form which add the task */}
       <TaskAdder newValue={newValues} onChangeValue={handleNewValue} />
     </div>
@@ -111,7 +134,7 @@ function CleanUpTasks() {
   return <button>clean up the room</button>;
 }
 
-function AddButton() {
+function AddNewTask() {
   return (
     <div className="add__button__container">
       <button className={`add__button ${style.addBtn}`}>New</button>
@@ -121,23 +144,24 @@ function AddButton() {
 
 function TaskAdder({ newValue, onChangeValue }) {
   return (
-    <div>
-      <form onSubmit={(e) => e.target.value}>
+    <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
+      <form onSubmit={(e) => e.target.value} className={"d-flex flex-column"}>
         <label>
           name
           <input
             type={"text"}
             value={newValue.name}
             name="name"
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
         </label>
         <label>
           Description
+          <br/>
           <textarea
             value={newValue.description}
             name="description"
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
         </label>
         <label>
@@ -146,7 +170,7 @@ function TaskAdder({ newValue, onChangeValue }) {
             value={newValue.priority}
             name="priority"
             type={"color"}
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
         </label>
         <label>
@@ -154,26 +178,27 @@ function TaskAdder({ newValue, onChangeValue }) {
           <input
             type={"checkbox"}
             name="energyCosts"
-            id="energyCost0"
+            id="1"
             value={newValue.energyCosts[0]}
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
           <input
             type={"checkbox"}
             name="energyCosts"
-            id="energyCost1"
+            id="2"
             value={newValue.energyCosts[1]}
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
           <input
             type={"checkbox"}
             name="energyCosts"
-            id="energyCost2"
+            id="3"
             value={newValue.energyCosts[2]}
-            onChange={e => onChangeValue(e.target)}
+            onChange={(e) => onChangeValue(e.target)}
           />
         </label>
       </form>
+      <button className={style.addBtn}>add</button>
     </div>
   );
 }
