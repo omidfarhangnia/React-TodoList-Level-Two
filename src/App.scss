@@ -32,18 +32,48 @@ $mainFont: 'Roboto', sans-serif;
 
 .todoContainer{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url("../public/background-image.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-color: $mainBlack;
-    background-blend-mode: color-dodge;
-    padding: 4vh 4vw;
+    background-blend-mode: multiply;
+    padding: 8vh 4vw 17vh 4vw;
 }
 
 .date__container--heading, .date__container--date{
     font-size: 1rem;
     font-weight: 700;
     padding: 8px 19px;
+}
+
+.add__button__container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colorFul__btn{
+    border: 0;
+    background-image: url("../public/buttons-frame.png"), 
+                radial-gradient(circle at 100% 0%, rgba(253, 194, 176, 1), rgba(235, 81, 158, 0.25)),
+                radial-gradient(circle at 0%, rgba(90, 248, 254, 1), rgba(235, 81, 158, 0.25)),
+                radial-gradient(circle at 75% 100%, rgba(137, 59, 254, 1), rgba(128, 187, 219, 0.25)),
+                radial-gradient(rgba(78, 223, 252, 1), rgba(78, 223, 252, 1));            
+    border-radius: 10px;
+    color: $mainBlack;
+    font-family: $mainFont;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    min-width: 100px;
+    min-height: 50px;
 }
