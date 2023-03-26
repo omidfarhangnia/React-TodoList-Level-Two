@@ -38,33 +38,32 @@ const initialValue = [
 ];
 
 export default function App() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("#000000");
-  const [energyCosts, setEnergyCosts] = useState({
-    "0": false,
-    "1": false,
-    "2": false,
+  const [newValues, setNewValues] = useState({
+    name: "",
+    description: "",
+    priority: "#000000",
+    energyCosts: {
+      energyCost0: false,
+      energyCost1: false,
+      energyCost2: false,
+    },
   });
 
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
-
-  function handleChangePriority(e) {
-    setPriority(e.target.value);
-  }
-
-  function handleChangeEnergyCost(e) {
-    let currentName = e.target.name;
-    setEnergyCosts(
-
-    );
-    // setEnergyCosts(e.target.value);
+  function handleNewValue(target) {
+    if(target.type === "checkbox"){
+      setNewValues({
+        ...newValues,
+        [target.name]: {
+          ...newValues.energyCosts,
+          [target.id]: target.checked
+        }
+      })
+    }else{
+      setNewValues({
+        ...newValues,
+        [target.name]: target.value
+      })
+    }
   }
 
   return (
@@ -81,16 +80,7 @@ export default function App() {
       {/* you can use this for adding task to project */}
       <AddButton />
       {/* this is the form which add the task */}
-      <TaskAdder
-        onChangeName={handleChangeName}
-        onChangeDescription={handleChangeDescription}
-        onChangePriority={handleChangePriority}
-        onChangeEnergyCost={handleChangeEnergyCost}
-        name={name}
-        description={description}
-        priority={priority}
-        energyCosts={energyCosts}
-      />
+      <TaskAdder newValue={newValues} onChangeValue={handleNewValue} />
     </div>
   );
 }
@@ -129,27 +119,59 @@ function AddButton() {
   );
 }
 
-function TaskAdder({onChangeName, onChangeDescription, onChangePriority, onChangeEnergyCost, name, description, priority, energyCosts}) {
+function TaskAdder({ newValue, onChangeValue }) {
   return (
     <div>
       <form onSubmit={(e) => e.target.value}>
         <label>
           name
-          <input type={"text"} value={name} onChange={onChangeName}/>
+          <input
+            type={"text"}
+            value={newValue.name}
+            name="name"
+            onChange={e => onChangeValue(e.target)}
+          />
         </label>
         <label>
           Description
-          <textarea value={description} onChange={onChangeDescription}/>
+          <textarea
+            value={newValue.description}
+            name="description"
+            onChange={e => onChangeValue(e.target)}
+          />
         </label>
         <label>
           Priority
-          <input value={priority} type={"color"} onChange={onChangePriority}/>
+          <input
+            value={newValue.priority}
+            name="priority"
+            type={"color"}
+            onChange={e => onChangeValue(e.target)}
+          />
         </label>
         <label>
-          energy costs
-          <input name="0" type={"checkbox"} value={energyCosts[0]} onChange={onChangeEnergyCost}/>
-          <input name="1" type={"checkbox"} value={energyCosts[1]} onChange={onChangeEnergyCost} />
-          <input name="2" type={"checkbox"} value={energyCosts[2]} onChange={onChangeEnergyCost} />
+          energy costs.
+          <input
+            type={"checkbox"}
+            name="energyCosts"
+            id="energyCost0"
+            value={newValue.energyCosts[0]}
+            onChange={e => onChangeValue(e.target)}
+          />
+          <input
+            type={"checkbox"}
+            name="energyCosts"
+            id="energyCost1"
+            value={newValue.energyCosts[1]}
+            onChange={e => onChangeValue(e.target)}
+          />
+          <input
+            type={"checkbox"}
+            name="energyCosts"
+            id="energyCost2"
+            value={newValue.energyCosts[2]}
+            onChange={e => onChangeValue(e.target)}
+          />
         </label>
       </form>
     </div>
