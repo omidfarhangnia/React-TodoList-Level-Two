@@ -42,10 +42,11 @@ $mainFont: 'Roboto', sans-serif;
     padding: 8vh 4vw 17vh 4vw;
 }
 
-.date__container--heading, .date__container--date{
+.date__header{
     font-size: 1rem;
     font-weight: 700;
     padding: 8px 19px;
+    text-transform: capitalize;
 }
 
 .add__button__container{
@@ -102,7 +103,7 @@ $mainFont: 'Roboto', sans-serif;
     }
     input,
     textarea{
-        // all: unset;
+        all: unset;
         padding: 5px 10px;
         font-size: .9rem;
         text-transform: lowercase;
@@ -116,11 +117,20 @@ $mainFont: 'Roboto', sans-serif;
         height: 30px;
         border: 0;
     }
-    input[type="checkbox"]{
-        border: 0;
-        width: 20px;
-        height: 20px;
-        outline: 0;
-        background-color: green;
+    div{
+        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr 8fr 1fr;
+        gap: 20px;
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
+}
+
+.back__button{
+    all: unset;
+    cursor: pointer;
 }
