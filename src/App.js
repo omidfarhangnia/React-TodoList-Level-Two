@@ -46,14 +46,11 @@ export default function App() {
     energyCosts: [false, false, false]
   });
 
-  console.log(newValues.en)
-
-  function handleNewValue(id, energyCost) {
-    console.log(energyCost)
+  function handleNewValue(target) {
     if (false) {
       let newEnergyValue = [];
       for(var i = 1; i <= 3; i++){
-        if(i <= Number(id)){
+        if(i <= ******){
           newEnergyValue.push(true)
         }else{
           newEnergyValue.push(false)

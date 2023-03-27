@@ -5,7 +5,6 @@ export default function TaskAdder({ newValue, onChangeValue }) {
   const [isEnergyOn, setIsEnergyOn] = useState(false);
 
   function handleChangeActiveId(id, target) {
-    onChangeValue(target, id)
     if (id === 1) {
       setIsEnergyOn(!isEnergyOn);
     }
