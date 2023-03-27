@@ -48,8 +48,9 @@ export default function App() {
 
   console.log(newValues.en)
 
-  function handleNewValue(target, id) {
-    if (target.getAttribute("isThunder") === "true") {
+  function handleNewValue(id, energyCost) {
+    console.log(energyCost)
+    if (false) {
       let newEnergyValue = [];
       for(var i = 1; i <= 3; i++){
         if(i <= Number(id)){

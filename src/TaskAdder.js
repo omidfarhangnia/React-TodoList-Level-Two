@@ -69,16 +69,19 @@ export default function TaskAdder({ newValue, onChangeValue }) {
             id={1}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
+            energyCost={[true, false, false]}
           />
           <ThunderIcon
             id={2}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
+            energyCost={[true, true, false]}
           />
           <ThunderIcon
             id={3}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
+            energyCost={[true, true, true]}
           />
         </label>
       </form>
