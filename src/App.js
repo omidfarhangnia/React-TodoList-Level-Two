@@ -1,4 +1,11 @@
-import { useState } from "react";
+import {
+  useState,
+  useLayoutEffect,
+  useRef,
+  useContext,
+  createContext,
+} from "react";
+import gsap from "gsap";
 import "./App.scss";
 import BackLogs from "./BackLogs";
 import CompletedTasks from "./CompletedTasks";
@@ -37,30 +44,34 @@ const initialValue = [
   },
 ];
 
+const CtContainer = createContext(null);
+
 export default function App() {
-  const [tasks, setTasks] =  useState(initialValue);
+  const [tasks, setTasks] = useState(initialValue);
   const [newValues, setNewValues] = useState({
     name: "",
     description: "",
     priority: "#ffffff",
-    energyCosts: [false, false, false]
+    energyCosts: [false, false, false],
   });
+  const container = useRef();
+
+  useLayoutEffect(() => {}, []);
 
   function handleNewValue(target) {
     if (false) {
-      let newEnergyValue = [];
-      for(var i = 1; i <= 3; i++){
-        if(i <= ******){
-          newEnergyValue.push(true)
-        }else{
-          newEnergyValue.push(false)
-        }
-      }
-
-      setNewValues({
-        ...newValues,
-        energyCosts: newEnergyValue
-      });
+      //   let newEnergyValue = [];
+      //   for(var i = 1; i <= 3; i++){
+      //     if(i <= ******){
+      //       newEnergyValue.push(true)
+      //     }else{
+      //       newEnergyValue.push(false)
+      //     }
+      //   }
+      //   setNewValues({
+      //     ...newValues,
+      //     energyCosts: newEnergyValue
+      //   });
     } else {
       setNewValues({
         ...newValues,
@@ -70,21 +81,26 @@ export default function App() {
   }
 
   return (
-    <div className={`todoContainer d-flex flex-column justify-content-between`}>
-      <HeaderSection />
-      {/* it will give a button which show current task */}
-      {/* <CurrentTask /> */}
-      {/* it will give a list of all the uncompleted tasks */}
-      {/* <BackLogs /> */}
-      {/* it will give a list of all the completed tasks*/}
-      {/* <CompletedTasks /> */}
-      {/* it will give a button which can delete all tasks*/}
-      {/* <CleanUpTasks /> */}
-      {/* you can use this for adding task to project */}
-      <AddNewTask />
-      {/* this is the form which add the task */}
-      <TaskAdder newValue={newValues} onChangeValue={handleNewValue} />
-    </div>
+    <CtContainer.Provider value={container}>
+      <div
+        className={`todoContainer d-flex flex-column justify-content-between`}
+        ref={container}
+      >
+        <HeaderSection />
+        {/* it will give a button which show current task */}
+        {/* <CurrentTask /> */}
+        {/* it will give a list of all the uncompleted tasks */}
+        {/* <BackLogs /> */}
+        {/* it will give a list of all the completed tasks*/}
+        {/* <CompletedTasks /> */}
+        {/* it will give a button which can delete all tasks*/}
+        {/* <CleanUpTasks /> */}
+        {/* you can use this for adding task to project */}
+        <AddNewTask />
+        {/* this is the form which add the task */}
+        <TaskAdder newValue={newValues} onChangeValue={handleNewValue} />
+      </div>
+    </CtContainer.Provider>
   );
 }
 
@@ -93,9 +109,7 @@ function HeaderSection() {
     <header className="d-flex flex-column align-items-center font-roboto">
       <h1 className="text-center text-mainBlue mb-3 text-capitalize">Note</h1>
       <div className="date__container d-flex justify-content-around align-items-center">
-        <h4
-          className="date__container--heading text-uppercase font-roboto text-mainBlack bg-mainBlue rounded-pill m-0 date__header"
-        >
+        <h4 className="date__container--heading text-uppercase font-roboto text-mainBlack bg-mainBlue rounded-pill m-0 date__header">
           today
         </h4>
         <span className="date__container--date text-mainBlue font-roboto date__header">
@@ -115,12 +129,32 @@ function CleanUpTasks() {
 }
 
 function AddNewTask() {
+  const container = useContext(CtContainer);
+  let tl;
+  const toggleTimeline = () => {
+    tl.reversed(!tl.reversed());
+  };
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context((self) => {
+      const page = self.selector(`.${itsId}`);
+      tl = gsap
+        .timeline()
+        .set(page, { top: "100vh" })
+        .to(page, { top: 0, duration: 1, ease: "linear" }, "+=.5")
+        .reverse();
+      return () => ctx.revert();
+    }, container);
+  }, []);
+
   return (
     <div className="add__button__container">
-      <button className={`add__button border-0 colorFul__btn`}>New</button>
+      <button
+        className={`add__button border-0 colorFul__btn`}
+        onClick={handleToggleAnime}
+      >
+        New
+      </button>
     </div>
   );
 }
-
-
-

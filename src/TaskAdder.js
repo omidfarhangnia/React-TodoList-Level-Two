@@ -1,4 +1,6 @@
 import { useState } from "react";
+import gsap from "gsap";
+
 
 export default function TaskAdder({ newValue, onChangeValue }) {
   const [activeId, setActiveId] = useState(0);
@@ -15,6 +17,7 @@ export default function TaskAdder({ newValue, onChangeValue }) {
       setActiveId(id);
     }
   }
+
   return (
     <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
       <div>
