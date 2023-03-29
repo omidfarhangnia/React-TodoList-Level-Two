@@ -1,6 +1,6 @@
 import { useState } from "react";
 import gsap from "gsap";
-
+import { ReverseAnime } from "./toggleAnime";
 
 export default function TaskAdder({ newValue, onChangeValue }) {
   const [activeId, setActiveId] = useState(0);
@@ -21,7 +21,7 @@ export default function TaskAdder({ newValue, onChangeValue }) {
   return (
     <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
       <div>
-        <button className="back__button">
+        <ReverseAnime className={"back__button"} animeId={"taskAdderContainer"}>
           <svg
             width="20"
             height="20"
@@ -34,8 +34,11 @@ export default function TaskAdder({ newValue, onChangeValue }) {
               fill="#78ACD5"
             />
           </svg>
-        </button>
-        <h4 className="text-center text-mainBlue text-capitalize m-0">new note</h4>
+          ّ
+        </ReverseAnime>
+        <h4 className="text-center text-mainBlue text-capitalize m-0">
+          new note
+        </h4>
       </div>
       <form onSubmit={(e) => e.target.value} className={"d-flex flex-column"}>
         <label>

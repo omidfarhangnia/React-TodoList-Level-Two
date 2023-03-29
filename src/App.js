@@ -10,6 +10,7 @@ import "./App.scss";
 import BackLogs from "./BackLogs";
 import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
+import StartAnime from "./toggleAnime";
 
 let currentDate;
 if (typeof window !== "undefined") {
@@ -44,7 +45,7 @@ const initialValue = [
   },
 ];
 
-const CtContainer = createContext(null);
+export const CtContainer = createContext(null);
 
 export default function App() {
   const [tasks, setTasks] = useState(initialValue);
@@ -129,32 +130,11 @@ function CleanUpTasks() {
 }
 
 function AddNewTask() {
-  const container = useContext(CtContainer);
-  let tl;
-  const toggleTimeline = () => {
-    tl.reversed(!tl.reversed());
-  };
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context((self) => {
-      const page = self.selector(`.${itsId}`);
-      tl = gsap
-        .timeline()
-        .set(page, { top: "100vh" })
-        .to(page, { top: 0, duration: 1, ease: "linear" }, "+=.5")
-        .reverse();
-      return () => ctx.revert();
-    }, container);
-  }, []);
-
   return (
     <div className="add__button__container">
-      <button
-        className={`add__button border-0 colorFul__btn`}
-        onClick={handleToggleAnime}
-      >
+      <StartAnime className={`add__button border-0 colorFul__btn`} animeId={'taskAdderContainer'}>
         New
-      </button>
+      </StartAnime>
     </div>
   );
 }
