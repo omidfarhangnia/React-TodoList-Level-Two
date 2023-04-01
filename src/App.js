@@ -1,8 +1,7 @@
 import {
   useState,
-  useLayoutEffect,
   useRef,
-  useContext,
+  useEffect,
   createContext,
 } from "react";
 import gsap from "gsap";
@@ -11,6 +10,9 @@ import BackLogs from "./BackLogs";
 import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
 import StartAnime from "./toggleAnime";
+import {query, collection, onSnapshot} from "firebase/firestore";
+import { db } from "./firebase";
+
 
 let currentDate;
 if (typeof window !== "undefined") {
@@ -20,35 +22,10 @@ if (typeof window !== "undefined") {
   }`;
 }
 
-let currentId = 3;
-const initialValue = [
-  {
-    id: 0,
-    name: "home works",
-    description: "hello i am here to say something i want to do my home works",
-    priority: "#ffffff",
-    energyCosts: [true, true, true],
-  },
-  {
-    id: 1,
-    name: "making dinner",
-    description: "oh my god i want to make dinner what do you prefer tonight",
-    priority: "#555555",
-    energyCosts: [true, false, false],
-  },
-  {
-    id: 2,
-    name: "going gym",
-    description: "i go to sport gym but i want to try something new",
-    priority: "#000000",
-    energyCosts: [true, true, false],
-  },
-];
-
 export const CtContainer = createContext(null);
 
 export default function App() {
-  const [tasks, setTasks] = useState(initialValue);
+  const [todos, setTodos] = useState([]);
   const [newValues, setNewValues] = useState({
     name: "",
     description: "",
@@ -57,7 +34,18 @@ export default function App() {
   });
   const container = useRef();
 
-  useLayoutEffect(() => {}, []);
+  // hello there
+  useEffect(() => {
+    const q = query(collection(db, "todos"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = [];
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArr);
+    });
+    return () => unsubscribe();
+  }, []);
 
   function handleNewValue(target) {
     if (false) {
