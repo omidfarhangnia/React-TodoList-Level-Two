@@ -1,27 +1,29 @@
 import { useState } from "react";
-import gsap from "gsap";
-import { ReverseAnime } from "./toggleAnime";
 
-export default function TaskAdder({ newValue, onChangeValue }) {
+export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
   const [activeId, setActiveId] = useState(0);
   const [isEnergyOn, setIsEnergyOn] = useState(false);
 
-  function handleChangeActiveId(id, target) {
-    if (id === 1) {
+  function handleChangeActiveId(thunderId, energyCost) {
+    if (thunderId <= 1) {
       setIsEnergyOn(!isEnergyOn);
     }
 
     if (isEnergyOn) {
       setActiveId(0);
+      onChangeValue(null, [false, false, false])
     } else {
-      setActiveId(id);
+      onChangeValue(null, energyCost)
+      setActiveId(thunderId);
     }
   }
 
   return (
     <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
       <div>
-        <ReverseAnime className={"back__button"} animeId={"taskAdderContainer"}>
+        {/* <ReverseAnime className={"back__button"} animeId={"taskAdderContainer"}> */}
+        {/* </ReverseAnime> */}
+        <button>
           <svg
             width="20"
             height="20"
@@ -34,8 +36,7 @@ export default function TaskAdder({ newValue, onChangeValue }) {
               fill="#78ACD5"
             />
           </svg>
-          ّ
-        </ReverseAnime>
+        </button>
         <h4 className="text-center text-mainBlue text-capitalize m-0">
           new note
         </h4>
@@ -71,64 +72,66 @@ export default function TaskAdder({ newValue, onChangeValue }) {
         <label>
           energy costs.
           <ThunderIcon
-            id={1}
+            thunderId={1}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
             energyCost={[true, false, false]}
           />
           <ThunderIcon
-            id={2}
+            thunderId={2}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
             energyCost={[true, true, false]}
           />
           <ThunderIcon
-            id={3}
+            thunderId={3}
             activeId={activeId}
             onChangeActiveId={handleChangeActiveId}
             energyCost={[true, true, true]}
           />
         </label>
       </form>
-      <button className="border-0 colorFul__btn">add</button>
+      <button className="border-0 colorFul__btn" onClick={createTodo}>
+        add
+      </button>
     </div>
   );
 }
 
-function ThunderIcon({ activeId, id, onChangeActiveId }) {
-  if (id <= activeId) {
+function ThunderIcon({ activeId, thunderId, onChangeActiveId, energyCost }) {
+  if (thunderId <= activeId) {
     return (
-      <svg
-        width="20"
-        height="15"
-        isThunder="true"
-        viewBox="0 0 20 15"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        onClick={(e) => onChangeActiveId(id, e.target)}
-      >
-        <path
-          d="M10.1862 6.5933H7.99745V1.4933C7.99745 0.303301 7.35286 0.0624681 6.56661 0.954968L5.99995 1.59955L1.20453 7.05372C0.54578 7.79747 0.82203 8.40663 1.8137 8.40663H4.00245V13.5066C4.00245 14.6966 4.64703 14.9375 5.43328 14.045L5.99995 13.4004L10.7954 7.94622C11.4541 7.20247 11.1779 6.5933 10.1862 6.5933Z"
-          fill="#78ACD5"
-        />
-      </svg>
+      <span onClick={(e) => onChangeActiveId(thunderId, energyCost)}>
+        <svg
+          width="20"
+          height="15"
+          viewBox="0 0 20 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.1862 6.5933H7.99745V1.4933C7.99745 0.303301 7.35286 0.0624681 6.56661 0.954968L5.99995 1.59955L1.20453 7.05372C0.54578 7.79747 0.82203 8.40663 1.8137 8.40663H4.00245V13.5066C4.00245 14.6966 4.64703 14.9375 5.43328 14.045L5.99995 13.4004L10.7954 7.94622C11.4541 7.20247 11.1779 6.5933 10.1862 6.5933Z"
+            fill="#78ACD5"
+          />
+        </svg>
+      </span>
     );
   } else {
     return (
-      <svg
-        width="20"
-        height="15"
-        isThunder="true"
-        viewBox="0 0 20 15"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        onClick={(e) => onChangeActiveId(id, e.target)}
-      >
-        <path
-          d="M10.1862 6.5933H7.99745V1.4933C7.99745 0.303301 7.35286 0.0624681 6.56661 0.954968L5.99995 1.59955L1.20453 7.05372C0.54578 7.79747 0.82203 8.40663 1.8137 8.40663H4.00245V13.5066C4.00245 14.6966 4.64703 14.9375 5.43328 14.045L5.99995 13.4004L10.7954 7.94622C11.4541 7.20247 11.1779 6.5933 10.1862 6.5933Z"
-          fill="white"
-        />
-      </svg>
+      <span onClick={(e) => onChangeActiveId(thunderId, energyCost)}>
+        <svg
+          width="20"
+          height="15"
+          viewBox="0 0 20 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.1862 6.5933H7.99745V1.4933C7.99745 0.303301 7.35286 0.0624681 6.56661 0.954968L5.99995 1.59955L1.20453 7.05372C0.54578 7.79747 0.82203 8.40663 1.8137 8.40663H4.00245V13.5066C4.00245 14.6966 4.64703 14.9375 5.43328 14.045L5.99995 13.4004L10.7954 7.94622C11.4541 7.20247 11.1779 6.5933 10.1862 6.5933Z"
+            fill="white"
+          />
+        </svg>
+      </span>
     );
   }
 }

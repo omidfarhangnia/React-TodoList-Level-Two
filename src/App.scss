@@ -1,136 +1,140 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
-
-// variables
-
-$mainColor: #78ACD5;
-$mainBlack: #141414;
-$mainFont: 'Roboto', sans-serif;
-
-// common classes
-
-.text-mainBlue{
-    color: $mainColor;
+body{
+    background: gray;
 }
 
-.bg-mainBlue{
-    background-color: $mainColor;
-}
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
 
-.text-mainBlack{
-    color: $mainBlack;
-}
+// // variables
 
-.bg-mainBlack{
-    background-color: $mainBlack;
-}
+// $mainColor: #78ACD5;
+// $mainBlack: #141414;
+// $mainFont: 'Roboto', sans-serif;
 
-.font-roboto{
-    font-family: $mainFont;
-}
+// // common classes
 
-// page style
+// .text-mainBlue{
+//     color: $mainColor;
+// }
 
-.todoContainer{
-    width: 100%;
-    min-height: 100vh;
-    background-image: url("../public/background-image.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-color: $mainBlack;
-    background-blend-mode: multiply;
-    padding: 8vh 4vw 17vh 4vw;
-}
+// .bg-mainBlue{
+//     background-color: $mainColor;
+// }
 
-.date__header{
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 8px 19px;
-    text-transform: capitalize;
-}
+// .text-mainBlack{
+//     color: $mainBlack;
+// }
 
-.add__button__container{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px 20px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+// .bg-mainBlack{
+//     background-color: $mainBlack;
+// }
 
-.colorFul__btn{
-    border: 0;
-    background-image: url("../public/buttons-frame.png"), 
-                radial-gradient(circle at 100% 0%, rgba(253, 194, 176, 1), rgba(235, 81, 158, 0.25)),
-                radial-gradient(circle at 0%, rgba(90, 248, 254, 1), rgba(235, 81, 158, 0.25)),
-                radial-gradient(circle at 75% 100%, rgba(137, 59, 254, 1), rgba(128, 187, 219, 0.25)),
-                radial-gradient(rgba(78, 223, 252, 1), rgba(78, 223, 252, 1));            
-    border-radius: 10px;
-    color: $mainBlack;
-    font-family: $mainFont;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: capitalize;
-    min-width: 100px;
-    min-height: 50px;
-}
+// .font-roboto{
+//     font-family: $mainFont;
+// }
 
-.taskAdderContainer{
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 100vh;
-    left: 0;
-    background-color: $mainBlack;
-    form{
-        width: 80%;
-        gap: 1.5rem;
-    }
-    label{
-        background: #181818;
-        width: 100%;
-        color: #ffffff;
-        padding: .5rem;
-        font-family: $mainFont;
-        text-transform: capitalize;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    input,
-    textarea{
-        all: unset;
-        padding: 5px 10px;
-        font-size: .9rem;
-        text-transform: lowercase;
-        border: {
-            right: 1px solid #ffffff;
-            left: 1px solid #ffffff;
-        }
-    }
-    input[type="color"]{
-        width: 25%;
-        height: 30px;
-        border: 0;
-    }
-    div{
-        width: 90%;
-        display: grid;
-        grid-template-columns: 1fr 8fr 1fr;
-        gap: 20px;
-        button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-}
+// // page style
 
-.back__button{
-    all: unset;
-    cursor: pointer;
-}
+// .todoContainer{
+//     width: 100%;
+//     min-height: 100vh;
+//     background-image: url("../public/background-image.webp");
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center;
+//     background-color: $mainBlack;
+//     background-blend-mode: multiply;
+//     padding: 8vh 4vw 17vh 4vw;
+// }
+
+// .date__header{
+//     font-size: 1rem;
+//     font-weight: 700;
+//     padding: 8px 19px;
+//     text-transform: capitalize;
+// }
+
+// .add__button__container{
+//     position: fixed;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 80px;
+//     background: rgba(255, 255, 255, 0.1);
+//     border-radius: 20px 20px 0 0;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .colorFul__btn{
+//     border: 0;
+//     background-image: url("../public/buttons-frame.png"), 
+//                 radial-gradient(circle at 100% 0%, rgba(253, 194, 176, 1), rgba(235, 81, 158, 0.25)),
+//                 radial-gradient(circle at 0%, rgba(90, 248, 254, 1), rgba(235, 81, 158, 0.25)),
+//                 radial-gradient(circle at 75% 100%, rgba(137, 59, 254, 1), rgba(128, 187, 219, 0.25)),
+//                 radial-gradient(rgba(78, 223, 252, 1), rgba(78, 223, 252, 1));            
+//     border-radius: 10px;
+//     color: $mainBlack;
+//     font-family: $mainFont;
+//     font-size: 1.2rem;
+//     font-weight: bold;
+//     text-transform: capitalize;
+//     min-width: 100px;
+//     min-height: 50px;
+// }
+
+// .taskAdderContainer{
+//     width: 100vw;
+//     height: 100vh;
+//     // position: fixed;
+//     // top: 100vh;
+//     // left: 0;
+//     background-color: $mainBlack;
+//     form{
+//         width: 80%;
+//         gap: 1.5rem;
+//     }
+//     label{
+//         background: #181818;
+//         width: 100%;
+//         color: #ffffff;
+//         padding: .5rem;
+//         font-family: $mainFont;
+//         text-transform: capitalize;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//     }
+//     input,
+//     textarea{
+//         all: unset;
+//         padding: 5px 10px;
+//         font-size: .9rem;
+//         text-transform: lowercase;
+//         border: {
+//             right: 1px solid #ffffff;
+//             left: 1px solid #ffffff;
+//         }
+//     }
+//     input[type="color"]{
+//         width: 25%;
+//         height: 30px;
+//         border: 0;
+//     }
+//     div{
+//         width: 90%;
+//         display: grid;
+//         grid-template-columns: 1fr 8fr 1fr;
+//         gap: 20px;
+//         button{
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//         }
+//     }
+// }
+
+// .back__button{
+//     all: unset;
+//     cursor: pointer;
+// }

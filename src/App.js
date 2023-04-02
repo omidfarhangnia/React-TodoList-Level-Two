@@ -1,18 +1,12 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  createContext,
-} from "react";
-import gsap from "gsap";
+import { useState, useRef, useEffect, createContext } from "react";
+// import gsap from "gsap";
 import "./App.scss";
-import BackLogs from "./BackLogs";
-import CompletedTasks from "./CompletedTasks";
+// import BackLogs from "./BackLogs";
+// import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
 import StartAnime from "./toggleAnime";
-import {query, collection, onSnapshot} from "firebase/firestore";
+import { query, collection, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase";
-
 
 let currentDate;
 if (typeof window !== "undefined") {
@@ -34,7 +28,9 @@ export default function App() {
   });
   const container = useRef();
 
-  // hello there
+  console.log(newValues.energyCosts)
+
+  // read from database
   useEffect(() => {
     const q = query(collection(db, "todos"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -47,25 +43,20 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  function handleNewValue(target) {
-    if (false) {
-      //   let newEnergyValue = [];
-      //   for(var i = 1; i <= 3; i++){
-      //     if(i <= ******){
-      //       newEnergyValue.push(true)
-      //     }else{
-      //       newEnergyValue.push(false)
-      //     }
-      //   }
-      //   setNewValues({
-      //     ...newValues,
-      //     energyCosts: newEnergyValue
-      //   });
-    } else {
+  // add todo
+  const handleCreateTodo = async () => {};
+
+  function handleNewValue(target, energyCosts) {
+    if (target) {
       setNewValues({
         ...newValues,
         [target.name]: target.value,
       });
+    }else{
+      setNewValues({
+        ...newValues,
+        "energyCosts": energyCosts
+      })
     }
   }
 
@@ -87,7 +78,11 @@ export default function App() {
         {/* you can use this for adding task to project */}
         <AddNewTask />
         {/* this is the form which add the task */}
-        <TaskAdder newValue={newValues} onChangeValue={handleNewValue} />
+        <TaskAdder
+          newValue={newValues}
+          onChangeValue={handleNewValue}
+          createTodo={handleCreateTodo}
+        />
       </div>
     </CtContainer.Provider>
   );
@@ -120,9 +115,9 @@ function CleanUpTasks() {
 function AddNewTask() {
   return (
     <div className="add__button__container">
-      <StartAnime className={`add__button border-0 colorFul__btn`} animeId={'taskAdderContainer'}>
-        New
-      </StartAnime>
+      <button>New</button>
+      {/* <StartAnime className={`add__button border-0 colorFul__btn`} animeId={'taskAdderContainer'}> */}
+      {/* </StartAnime> */}
     </div>
   );
 }
