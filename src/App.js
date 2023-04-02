@@ -3,9 +3,8 @@ import { useState, useRef, useEffect, createContext } from "react";
 import "./App.scss";
 import BackLogs from "./BackLogs";
 import TodosPages from "./TodosPages";
-// import CompletedTasks from "./CompletedTasks";
+import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
-import StartAnime from "./toggleAnime";
 import { query, collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -62,6 +61,7 @@ export default function App() {
         description: newValues.description,
         priority: newValues.priority,
         energyCosts: newValues.energyCosts,
+        completed: false,
         order: currentOrder
       });
 
@@ -112,10 +112,12 @@ export default function App() {
         {/* <CurrentTask /> */}
         <hr />
         {/* it will give a list of all the uncompleted tasks */}
+        <h3>backlogs</h3>
         <BackLogs todos={todos} />
         {/* <hr /> */}
         {/* it will give a list of all the completed tasks*/}
-        {/* <CompletedTasks /> */}
+        <h3>completed tasks</h3>
+        <CompletedTasks todos={todos}/>
         {/* it will give a button which can delete all tasks*/}
         <CleanUpTodos clearAllTodos={clearAllTodos} />
         <hr />
