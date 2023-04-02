@@ -115,7 +115,7 @@ export default function App() {
         />
         <hr />
         {/* this is the component which make all pages */}
-        {/* <TodosPages todos={todos} /> */}
+        <TodosPages todos={todos} />
       </div>
     </CtContainer.Provider>
   );
