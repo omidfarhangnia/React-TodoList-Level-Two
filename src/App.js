@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, createContext } from "react";
 // import gsap from "gsap";
 import "./App.scss";
-// import BackLogs from "./BackLogs";
+import BackLogs from "./BackLogs";
+import TodosPages from "./TodosPages";
 // import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
 import StartAnime from "./toggleAnime";
-import { query, collection, onSnapshot } from "firebase/firestore";
+import { query, collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "./firebase";
 
 let currentDate;
@@ -28,8 +29,6 @@ export default function App() {
   });
   const container = useRef();
 
-  console.log(newValues.energyCosts)
-
   // read from database
   useEffect(() => {
     const q = query(collection(db, "todos"));
@@ -44,7 +43,33 @@ export default function App() {
   }, []);
 
   // add todo
-  const handleCreateTodo = async () => {};
+  const handleCreateTodo = async () => {
+    if (newValues.name === "" || newValues.description === "") {
+      alert("please fill inputs");
+      return;
+    } else {
+      await addDoc(collection(db, "todos"), {
+        name: newValues.name,
+        description: newValues.description,
+        priority: newValues.priority,
+        energyCosts: newValues.energyCosts,
+      });
+    }
+
+    setNewValues({
+      name: "",
+      description: "",
+      priority: "#ffffff",
+      energyCosts: [false, false, false],
+    });
+  };
+
+  // delete all todos
+  const clearAllTodos = async () => {
+    for(var i = 0; i < todos.length; i++){
+      await deleteDoc(doc(db, "todos", todos[i].id))
+    }
+  };
 
   function handleNewValue(target, energyCosts) {
     if (target) {
@@ -52,11 +77,11 @@ export default function App() {
         ...newValues,
         [target.name]: target.value,
       });
-    }else{
+    } else {
       setNewValues({
         ...newValues,
-        "energyCosts": energyCosts
-      })
+        energyCosts: energyCosts,
+      });
     }
   }
 
@@ -66,23 +91,31 @@ export default function App() {
         className={`todoContainer d-flex flex-column justify-content-between`}
         ref={container}
       >
+        {/* its the header of the page which give us the data */}
         <HeaderSection />
         {/* it will give a button which show current task */}
+        <AddNewTask />
+        {/* <hr /> */}
+        {/* you can use this for adding task to project */}
         {/* <CurrentTask /> */}
+        <hr />
         {/* it will give a list of all the uncompleted tasks */}
-        {/* <BackLogs /> */}
+        <BackLogs todos={todos} />
+        {/* <hr /> */}
         {/* it will give a list of all the completed tasks*/}
         {/* <CompletedTasks /> */}
         {/* it will give a button which can delete all tasks*/}
-        {/* <CleanUpTasks /> */}
-        {/* you can use this for adding task to project */}
-        <AddNewTask />
+        <CleanUpTodos clearAllTodos={clearAllTodos} />
+        <hr />
         {/* this is the form which add the task */}
         <TaskAdder
           newValue={newValues}
           onChangeValue={handleNewValue}
           createTodo={handleCreateTodo}
         />
+        <hr />
+        {/* this is the component which make all pages */}
+        {/* <TodosPages todos={todos} /> */}
       </div>
     </CtContainer.Provider>
   );
@@ -108,8 +141,8 @@ function CurrentTask() {
   return <button className="colorFul__btn">current Task</button>;
 }
 
-function CleanUpTasks() {
-  return <button>clean up the room</button>;
+function CleanUpTodos({ clearAllTodos }) {
+  return <button onClick={clearAllTodos}>clean up the room</button>;
 }
 
 function AddNewTask() {
