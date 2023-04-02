@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
-    "gsap": "^3.11.5"
+    "gsap": "^3.11.5",
+    "react-icons": "^4.8.0"
   }
 }

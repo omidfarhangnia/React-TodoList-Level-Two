@@ -98,7 +98,7 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
   );
 }
 
-function ThunderIcon({ activeId, thunderId, onChangeActiveId, energyCost }) {
+export function ThunderIcon({ activeId, thunderId, onChangeActiveId, energyCost }) {
   if (thunderId <= activeId) {
     return (
       <span onClick={(e) => onChangeActiveId(thunderId, energyCost)}>

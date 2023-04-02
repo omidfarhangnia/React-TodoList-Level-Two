@@ -19,6 +19,7 @@ if (typeof window !== "undefined") {
 
 export const CtContainer = createContext(null);
 
+let currentOrder = 0;
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [newValues, setNewValues] = useState({
@@ -37,6 +38,14 @@ export default function App() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
+      todosArr.sort(function(a, b){return a.order - b.order});
+
+      if(todosArr.length === 0){
+        currentOrder = 1;
+      }else{
+        currentOrder = (todosArr[todosArr.length - 1].order + 1);
+      }
+      
       setTodos(todosArr);
     });
     return () => unsubscribe();
@@ -53,7 +62,10 @@ export default function App() {
         description: newValues.description,
         priority: newValues.priority,
         energyCosts: newValues.energyCosts,
+        order: currentOrder
       });
+
+      currentOrder++;
     }
 
     setNewValues({
@@ -115,7 +127,7 @@ export default function App() {
         />
         <hr />
         {/* this is the component which make all pages */}
-        <TodosPages todos={todos} />
+        <TodosPages todos={todos} handleNewValue={handleNewValue}/>
       </div>
     </CtContainer.Provider>
   );
