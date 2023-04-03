@@ -115,30 +115,24 @@ export default function App() {
         {/* its the header of the page which give us the data */}
         <HeaderSection />
         {/* you can use this for adding task to project */}
-        <CurrentTask todos={todos}/>
+        <CurrentTask todos={todos} />
         {/* it will give a button which show current task */}
         <AddNewTask />
-        <hr />
         {/* it will give a list of all the uncompleted tasks */}
-        <h3>backlogs</h3>
         <BackLogs todos={todos} />
-        {/* <hr /> */}
         {/* it will give a list of all the completed tasks*/}
-        <h3>completed tasks</h3>
         <CompletedTasks todos={todos} />
         {/* it will give a button which can delete all tasks*/}
         <CleanUpTodos clearAllTodos={clearAllTodos} />
-        <hr />
-        {/* this is the form which add the task */}
-        <TaskAdder
-          newValue={newValues}
-          onChangeValue={handleNewValue}
-          createTodo={handleCreateTodo}
-        />
-        <hr />
-        {/* this is the component which make all pages */}
-        <TodosPages todos={todos} handleNewValue={handleNewValue} />
       </div>
+      {/* this is the component which make all pages */}
+      {/* <TodosPages todos={todos} handleNewValue={handleNewValue} /> */}
+      {/* this is the form which add the task */}
+      {/* <TaskAdder
+        newValue={newValues}
+        onChangeValue={handleNewValue}
+        createTodo={handleCreateTodo}
+      /> */}
     </CtContainer.Provider>
   );
 }
@@ -147,7 +141,7 @@ function HeaderSection() {
   return (
     <header className="d-flex flex-column align-items-center font-roboto">
       <h1 className="text-center text-mainBlue mb-3 text-capitalize">Note</h1>
-      <div className="date__container d-flex justify-content-around align-items-center">
+      <div className="date__container d-flex justify-content-between align-items-center">
         <h4 className="date__container--heading text-uppercase font-roboto text-mainBlack bg-mainBlue rounded-pill m-0 date__header">
           today
         </h4>
@@ -160,21 +154,23 @@ function HeaderSection() {
 }
 
 function CurrentTask({ todos }) {
-  if(todos[0] === undefined){
+  if (todos[0] === undefined) {
     return "";
-  }else{    
+  } else {
     let currentTaskName = null;
 
-    for(let i = 0; i < todos.length; i++){
-      if(todos[i].completed === false){
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].completed === false) {
         currentTaskName = todos[i].name;
         break;
       }
     }
-    
+
     return (
-      <div>
-        <button className="colorFul__btn">{currentTaskName === null ? "all tasks completed" : currentTaskName}</button>
+      <div className="currentTask__container d-flex justify-content-center">
+        <button className="colorFul__btn">
+          {currentTaskName === null ? "all tasks completed" : currentTaskName}
+        </button>
       </div>
     );
   }
@@ -188,8 +184,6 @@ function AddNewTask() {
   return (
     <div className="add__button__container">
       <button>New</button>
-      {/* <StartAnime className={`add__button border-0 colorFul__btn`} animeId={'taskAdderContainer'}> */}
-      {/* </StartAnime> */}
     </div>
   );
 }

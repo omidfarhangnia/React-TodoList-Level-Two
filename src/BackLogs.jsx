@@ -1,19 +1,19 @@
 import { updateDoc, doc } from "firebase/firestore";
-import { db } from  "./firebase";
+import { db } from "./firebase";
 import { EnergyCost } from "./TodosPages";
 import { GrCheckmark } from "react-icons/gr";
 
-
 export const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
-      completed: !todo.completed
-    })
-}
+  await updateDoc(doc(db, "todos", todo.id), {
+    completed: !todo.completed,
+  });
+};
 export default function BackLogs({ todos }) {
   return (
-    <>
+    <div className="tasks__container">
+      <h3 className="partHeaders font-roboto">backlogs</h3>
       {todos.map((todo, index) => {
-        if(todo.completed === true){
+        if (todo.completed === true) {
           return "";
         }
 
@@ -24,13 +24,13 @@ export default function BackLogs({ todos }) {
         }
 
         return (
-          <div key={index}>
-            <span style={{ background: todo.priority }}>...</span>
-            <span>{todo.name}</span>
-            <button onClick={() => toggleComplete(todo)}>
-              <GrCheckmark />
+          <div key={index} className="tasks">
+            <span style={{ background: todo.priority }} className="tasks--priority"></span>
+            <span className="tasks--name">{todo.name}</span>
+            <button onClick={() => toggleComplete(todo)} className="tasks--completeToggle">
+              <GrCheckmark size={20}/>
             </button>
-            <span>
+            <span className="tasks--thunders">
               {Thunder__icons.map((icon, index) => (
                 <span key={index}>{icon}</span>
               ))}
@@ -38,6 +38,6 @@ export default function BackLogs({ todos }) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
