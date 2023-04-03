@@ -5,7 +5,14 @@ import BackLogs from "./BackLogs";
 import TodosPages from "./TodosPages";
 import CompletedTasks from "./CompletedTasks";
 import TaskAdder from "./TaskAdder";
-import { query, collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
+import {
+  query,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 
 let currentDate;
@@ -37,14 +44,16 @@ export default function App() {
       querySnapshot.forEach((doc) => {
         todosArr.push({ ...doc.data(), id: doc.id });
       });
-      todosArr.sort(function(a, b){return a.order - b.order});
+      todosArr.sort(function (a, b) {
+        return a.order - b.order;
+      });
 
-      if(todosArr.length === 0){
+      if (todosArr.length === 0) {
         currentOrder = 1;
-      }else{
-        currentOrder = (todosArr[todosArr.length - 1].order + 1);
+      } else {
+        currentOrder = todosArr[todosArr.length - 1].order + 1;
       }
-      
+
       setTodos(todosArr);
     });
     return () => unsubscribe();
@@ -62,7 +71,7 @@ export default function App() {
         priority: newValues.priority,
         energyCosts: newValues.energyCosts,
         completed: false,
-        order: currentOrder
+        order: currentOrder,
       });
 
       currentOrder++;
@@ -78,8 +87,8 @@ export default function App() {
 
   // delete all todos
   const clearAllTodos = async () => {
-    for(var i = 0; i < todos.length; i++){
-      await deleteDoc(doc(db, "todos", todos[i].id))
+    for (var i = 0; i < todos.length; i++) {
+      await deleteDoc(doc(db, "todos", todos[i].id));
     }
   };
 
@@ -105,11 +114,10 @@ export default function App() {
       >
         {/* its the header of the page which give us the data */}
         <HeaderSection />
+        {/* you can use this for adding task to project */}
+        <CurrentTask todos={todos}/>
         {/* it will give a button which show current task */}
         <AddNewTask />
-        {/* <hr /> */}
-        {/* you can use this for adding task to project */}
-        {/* <CurrentTask /> */}
         <hr />
         {/* it will give a list of all the uncompleted tasks */}
         <h3>backlogs</h3>
@@ -117,7 +125,7 @@ export default function App() {
         {/* <hr /> */}
         {/* it will give a list of all the completed tasks*/}
         <h3>completed tasks</h3>
-        <CompletedTasks todos={todos}/>
+        <CompletedTasks todos={todos} />
         {/* it will give a button which can delete all tasks*/}
         <CleanUpTodos clearAllTodos={clearAllTodos} />
         <hr />
@@ -129,7 +137,7 @@ export default function App() {
         />
         <hr />
         {/* this is the component which make all pages */}
-        <TodosPages todos={todos} handleNewValue={handleNewValue}/>
+        <TodosPages todos={todos} handleNewValue={handleNewValue} />
       </div>
     </CtContainer.Provider>
   );
@@ -151,8 +159,25 @@ function HeaderSection() {
   );
 }
 
-function CurrentTask() {
-  return <button className="colorFul__btn">current Task</button>;
+function CurrentTask({ todos }) {
+  if(todos[0] === undefined){
+    return "";
+  }else{    
+    let currentTaskName = null;
+
+    for(let i = 0; i < todos.length; i++){
+      if(todos[i].completed === false){
+        currentTaskName = todos[i].name;
+        break;
+      }
+    }
+    
+    return (
+      <div>
+        <button className="colorFul__btn">{currentTaskName === null ? "all tasks completed" : currentTaskName}</button>
+      </div>
+    );
+  }
 }
 
 function CleanUpTodos({ clearAllTodos }) {

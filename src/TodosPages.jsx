@@ -6,7 +6,10 @@ import { IoChevronBackCircleSharp } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { BsSave2 } from "react-icons/bs";
 import { MdOutlineCancelPresentation } from "react-icons/md";
-import {RiDeleteBin6Line} from "react-icons/ri";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { GrCheckmark } from "react-icons/gr";
+import { GrClose } from "react-icons/gr";
+import { toggleComplete } from "./BackLogs";
 
 export function EnergyCost({ isOn }) {
   if (isOn) {
@@ -108,10 +111,10 @@ function TodoPage({ todo }) {
       energyCosts: currentValue.energyCosts,
     });
   };
-  
+
   const deleteTodo = async (todo) => {
-    await deleteDoc(doc(db, "todos", todo.id))
-  }
+    await deleteDoc(doc(db, "todos", todo.id));
+  };
 
   let Thunder__icons = [];
   for (let member of todo.energyCosts) {
@@ -129,15 +132,17 @@ function TodoPage({ todo }) {
         >
           <BsSave2 />
         </button>
-        <button onClick={() => {
+        <button
+          onClick={() => {
             setIsEditing(false);
             setCurrentValue({
               name: todo.name,
               description: todo.description,
               priority: todo.priority,
               energyCosts: todo.energyCosts,
-            })
-        }}>
+            });
+          }}
+        >
           <MdOutlineCancelPresentation />
         </button>
         <input
@@ -197,6 +202,7 @@ function TodoPage({ todo }) {
         <button onClick={() => deleteTodo(todo)}>
           <RiDeleteBin6Line />
         </button>
+        <button onClick={() => toggleComplete(todo)}>{todo.completed ? <GrClose /> : <GrCheckmark />}</button>
         <h2>{todo.name}</h2>
         {todo.description && <p>{todo.description}</p>}
         <span>
