@@ -193,3 +193,83 @@ function AddNewTask() {
     </div>
   );
 }
+
+// import "./App.css";
+// import { gsap } from "gsap";
+
+// let pageAnimations, pages;
+
+// window.addEventListener("load", () => {
+//   pages = document.querySelectorAll(".pages");
+// });
+
+// export default function App() {
+//   function handleClickBtn(pageId) {
+//     if (pageAnimations !== undefined) {
+//       if (!pageAnimations.isActive) {
+//         pageAnimations = gsap.to(pages[pageId], {
+//           y: "-100vh",
+//           duration: 1,
+//           ease: "linear",
+//           onComplete: () => {
+//             pageAnimations = undefined;
+//           },
+//         });
+//       }
+//     } else {
+//       pageAnimations = gsap.to(pages[pageId], {
+//         y: "-100vh",
+//         duration: 1,
+//         ease: "linear",
+//         onComplete: () => {
+//           pageAnimations = undefined;
+//         },
+//       });
+//     }
+//   }
+
+//   function handleClickPage(pageId) {
+//     if (pageAnimations !== undefined) {
+//       if (!pageAnimations.isActive) {
+//         pageAnimations = gsap.to(pages[pageId], {
+//           y: "0",
+//           duration: 1,
+//           ease: "linear",
+//           onComplete: () => {
+//             pageAnimations = undefined;
+//           },
+//         });
+//       }
+//     } else {
+//       pageAnimations = gsap.to(pages[pageId], {
+//         y: "0",
+//         duration: 1,
+//         ease: "linear",
+//         onComplete: () => {
+//           pageAnimations = undefined;
+//         },
+//       });
+//     }
+//   }
+
+//   return (
+//     <div className="container">
+//       <div>
+//         <button onClick={() => handleClickBtn(0)}>one</button>
+//         <button onClick={() => handleClickBtn(1)}>two</button>
+//         <button onClick={() => handleClickBtn(2)}>three</button>
+//       </div>
+//       <div className="page__container">
+//         <div className="page--one pages">
+//           <button onClick={() => handleClickPage(0)}>close one</button>
+//         </div>
+//         <div className="page--two pages">
+//           <button onClick={() => handleClickPage(1)}>close one</button>
+//         </div>
+//         <div className="page--thr pages">
+//           <button onClick={() => handleClickPage(2)}>close one</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
