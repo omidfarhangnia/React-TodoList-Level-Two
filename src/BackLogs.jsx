@@ -30,7 +30,7 @@ export default function BackLogs({ todos }) {
               style={{ background: todo.priority }}
               className="tasks--priority"
             ></span>
-            <button onClick={() => bringThePage("")}>
+            <button onClick={() => bringThePage(`#${todo.id}`)}>
               <span className="tasks--name">{todo.name}</span>
             </button>
             <button

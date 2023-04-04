@@ -21,7 +21,7 @@ export default function CompletedTasks({ todos }) {
         return (
           <div key={index} className="tasks">
             <span style={{ background: todo.priority }} className="tasks--priority"></span>
-            <button onClick={() => bringThePage("")}>
+            <button onClick={() => bringThePage(`#${todo.id}`)}>
               <span className="tasks--name">{todo.name}</span>
             </button>
             <button onClick={() => toggleComplete(todo)} className="tasks--completeToggle">

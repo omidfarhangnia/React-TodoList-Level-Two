@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 let pageAnimations;
 
 const bringAnime = (pageClassName) => {
-  pageAnimations = gsap.to(`.${pageClassName}`, {
+  pageAnimations = gsap.to(`${pageClassName}`, {
     y: "-100vh",
     duration: 1,
     ease: "linear",
@@ -14,7 +14,7 @@ const bringAnime = (pageClassName) => {
 }
 
 const takeAnime = (pageClassName) => {
-  pageAnimations = gsap.to(`.${pageClassName}`, {
+  pageAnimations = gsap.to(`${pageClassName}`, {
     y: "0",
     duration: 1,
     ease: "linear",

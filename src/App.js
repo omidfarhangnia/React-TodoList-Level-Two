@@ -85,7 +85,7 @@ export default function App() {
       energyCosts: [false, false, false],
     });
 
-    takeThePage("taskAdderContainer")
+    takeThePage(".taskAdderContainer")
   };
 
   // delete all todos
@@ -192,7 +192,7 @@ function CleanUpTodos({ clearAllTodos }) {
 function AddNewTask() {
   return (
     <div className="add__button__container d-flex justify-content-center">
-      <button className="colorFul__btn" onClick={() => bringThePage("taskAdderContainer")}>New</button>
+      <button className="colorFul__btn" onClick={() => bringThePage(".taskAdderContainer")}>New</button>
     </div>
   );
 }

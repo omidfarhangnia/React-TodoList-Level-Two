@@ -238,9 +238,43 @@ $mainFont: 'Roboto', sans-serif;
     }
 }
 
-.backWard__btn{
+.icons__style{
     all: unset;
     path{
         fill: $mainColor;
     }
+}
+
+.statusIcons__style{
+    all: unset;
+    polyline{
+        stroke: $mainColor;
+    }
+}
+
+.PathNone{
+    path[fill*="none"]{
+        fill: none;
+    }
+}
+
+.pages__container{
+    position: fixed;
+    top: 100vh;
+    left: 0;
+}
+
+.tasks__pages{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    padding: 10vh 10vw;
+    background-image: url("../public/background-image.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $mainBlack;
+    background-blend-mode: color-dodge;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr;
 }

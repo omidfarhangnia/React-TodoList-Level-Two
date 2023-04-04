@@ -23,7 +23,7 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
   return (
     <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
       <div>
-        <button className="backWard__btn" onClick={() => takeThePage("taskAdderContainer")}>
+        <button className="icons__style" onClick={() => takeThePage(".taskAdderContainer")}>
           <BsArrowLeftSquareFill size={24}/>
         </button>
         <h4 className="text-center text-mainBlue text-capitalize m-0">

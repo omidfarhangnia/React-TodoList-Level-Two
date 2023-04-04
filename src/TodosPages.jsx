@@ -2,14 +2,15 @@ import { useState } from "react";
 import { ThunderIcon } from "./TaskAdder";
 import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { IoChevronBackCircleSharp } from "react-icons/io5";
+import { toggleComplete } from "./BackLogs";
 import { FiEdit } from "react-icons/fi";
 import { BsSave2 } from "react-icons/bs";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrCheckmark } from "react-icons/gr";
 import { GrClose } from "react-icons/gr";
-import { toggleComplete } from "./BackLogs";
+import { takeThePage } from "./gsapAnime";
 
 export function EnergyCost({ isOn }) {
   if (isOn) {
@@ -47,7 +48,7 @@ export function EnergyCost({ isOn }) {
 
 export default function TodosPages({ todos, handleNewValue }) {
   return (
-    <div>
+    <div className="pages__container">
       {todos.map((todo) => (
         <TodoPage todo={todo} onChangeValue={handleNewValue} />
       ))}
@@ -123,14 +124,15 @@ function TodoPage({ todo }) {
 
   if (isEditing) {
     return (
-      <div id={todo.id}>
+      <div id={todo.id} className="tasks__pages">
         <button
           onClick={() => {
             setIsEditing(false);
             updateTodo(todo);
           }}
+          className="icons__style"
         >
-          <BsSave2 />
+          <BsSave2 size={24}/>
         </button>
         <button
           onClick={() => {
@@ -142,8 +144,9 @@ function TodoPage({ todo }) {
               energyCosts: todo.energyCosts,
             });
           }}
+          className="icons__style PathNone"
         >
-          <MdOutlineCancelPresentation />
+          <MdOutlineCancelPresentation size={24}/>
         </button>
         <input
           type="text"
@@ -193,17 +196,25 @@ function TodoPage({ todo }) {
   } else {
     return (
       <div id={todo.id} className="tasks__pages">
-        <button>
-          <IoChevronBackCircleSharp />
+        <button onClick={() => takeThePage(`#${todo.id}`)} className="icons__style">
+          <BsArrowLeftSquareFill size={24} />
         </button>
-        <button onClick={() => setIsEditing(true)}>
-          <FiEdit />
-        </button>
-        <button onClick={() => deleteTodo(todo)}>
-          <RiDeleteBin6Line />
-        </button>
-        <button onClick={() => toggleComplete(todo)}>{todo.completed ? <GrClose /> : <GrCheckmark />}</button>
         <h2>{todo.name}</h2>
+        <div style={{background: todo.priority}}></div>
+        <button onClick={() => setIsEditing(true)} className="icons__style">
+          <FiEdit size={24}/>
+        </button>
+        <button onClick={() => {
+          takeThePage(`#${todo.id}`);
+          deleteTodo(todo);
+        }}
+        className="icons__style PathNone"
+        >
+          <RiDeleteBin6Line size={24}/>
+        </button>
+        <button onClick={() => toggleComplete(todo)} className="statusIcons__style">
+          {todo.completed ? <GrClose size={24} /> : <GrCheckmark size={24} />}
+        </button>
         {todo.description && <p>{todo.description}</p>}
         <span>
           {Thunder__icons.map((icon, index) => (
