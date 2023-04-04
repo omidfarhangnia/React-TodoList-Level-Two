@@ -177,13 +177,19 @@ function CurrentTask({ todos }) {
 }
 
 function CleanUpTodos({ clearAllTodos }) {
-  return <button onClick={clearAllTodos}>clean up the room</button>;
+  return (
+    <div className="cleanUpTasks__container d-flex justify-content-center">
+      <button onClick={clearAllTodos} className="colorFul__btn">
+        clean up the room
+      </button>
+    </div>
+  );
 }
 
 function AddNewTask() {
   return (
-    <div className="add__button__container">
-      <button>New</button>
+    <div className="add__button__container d-flex justify-content-center">
+      <button className="colorFul__btn">New</button>
     </div>
   );
 }

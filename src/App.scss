@@ -48,10 +48,11 @@ $mainFont: 'Roboto', sans-serif;
     background-image: url("../public/background-image.webp");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     background-color: $mainBlack;
     background-blend-mode: multiply;
-    padding: 8vh 4vw 17vh 4vw;
+    background-attachment: fixed;
+    background-position: center;
+    padding: 8vh 4vw;
     h1{
         font-size: 2rem;
         @media (min-width: "800px") {
@@ -76,11 +77,11 @@ $mainFont: 'Roboto', sans-serif;
     max-width: 500px;
 }
 
-.currentTask__container{
-    padding: 15px 0;
+.currentTask__container, .cleanUpTasks__container{
+    padding: 30px 0;
     button{
         width: 60%;
-        max-width: 350px;
+        max-width: 300px;
     }
 }
 
@@ -90,11 +91,18 @@ $mainFont: 'Roboto', sans-serif;
     left: 0;
     width: 100%;
     height: 80px;
-    background: rgba(255, 255, 255, 0.1);
+    background-color: $mainBlack;
     border-radius: 20px 20px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (min-width: "800px") {
+        position: relative;
+        background: none;
+        button{
+            width: 300px;
+        }
+    }
 }
 
 .colorFul__btn{
@@ -118,6 +126,8 @@ $mainFont: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 0;
 }
 
 .tasks{
@@ -151,6 +161,18 @@ $mainFont: 'Roboto', sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    @media (min-width: "800px") {
+        max-width: 600px;
+        &--name{
+            font-size: 2rem;
+        }
+        &--thunders{
+            scale: 1.3;
+        }
+        &--completeToggle{
+            scale: 1.3;
+        }
     }
 }
 
