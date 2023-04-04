@@ -14,6 +14,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import { bringThePage, takeThePage } from "./gsapAnime";
 
 let currentDate;
 if (typeof window !== "undefined") {
@@ -83,6 +84,8 @@ export default function App() {
       priority: "#ffffff",
       energyCosts: [false, false, false],
     });
+
+    takeThePage("taskAdderContainer")
   };
 
   // delete all todos
@@ -126,13 +129,13 @@ export default function App() {
         <CleanUpTodos clearAllTodos={clearAllTodos} />
       </div>
       {/* this is the component which make all pages */}
-      {/* <TodosPages todos={todos} handleNewValue={handleNewValue} /> */}
+      <TodosPages todos={todos} handleNewValue={handleNewValue} />
       {/* this is the form which add the task */}
-      {/* <TaskAdder
+      <TaskAdder
         newValue={newValues}
         onChangeValue={handleNewValue}
         createTodo={handleCreateTodo}
-      /> */}
+      />
     </CtContainer.Provider>
   );
 }
@@ -189,87 +192,7 @@ function CleanUpTodos({ clearAllTodos }) {
 function AddNewTask() {
   return (
     <div className="add__button__container d-flex justify-content-center">
-      <button className="colorFul__btn">New</button>
+      <button className="colorFul__btn" onClick={() => bringThePage("taskAdderContainer")}>New</button>
     </div>
   );
 }
-
-// import "./App.css";
-// import { gsap } from "gsap";
-
-// let pageAnimations, pages;
-
-// window.addEventListener("load", () => {
-//   pages = document.querySelectorAll(".pages");
-// });
-
-// export default function App() {
-//   function handleClickBtn(pageId) {
-//     if (pageAnimations !== undefined) {
-//       if (!pageAnimations.isActive) {
-//         pageAnimations = gsap.to(pages[pageId], {
-//           y: "-100vh",
-//           duration: 1,
-//           ease: "linear",
-//           onComplete: () => {
-//             pageAnimations = undefined;
-//           },
-//         });
-//       }
-//     } else {
-//       pageAnimations = gsap.to(pages[pageId], {
-//         y: "-100vh",
-//         duration: 1,
-//         ease: "linear",
-//         onComplete: () => {
-//           pageAnimations = undefined;
-//         },
-//       });
-//     }
-//   }
-
-//   function handleClickPage(pageId) {
-//     if (pageAnimations !== undefined) {
-//       if (!pageAnimations.isActive) {
-//         pageAnimations = gsap.to(pages[pageId], {
-//           y: "0",
-//           duration: 1,
-//           ease: "linear",
-//           onComplete: () => {
-//             pageAnimations = undefined;
-//           },
-//         });
-//       }
-//     } else {
-//       pageAnimations = gsap.to(pages[pageId], {
-//         y: "0",
-//         duration: 1,
-//         ease: "linear",
-//         onComplete: () => {
-//           pageAnimations = undefined;
-//         },
-//       });
-//     }
-//   }
-
-//   return (
-//     <div className="container">
-//       <div>
-//         <button onClick={() => handleClickBtn(0)}>one</button>
-//         <button onClick={() => handleClickBtn(1)}>two</button>
-//         <button onClick={() => handleClickBtn(2)}>three</button>
-//       </div>
-//       <div className="page__container">
-//         <div className="page--one pages">
-//           <button onClick={() => handleClickPage(0)}>close one</button>
-//         </div>
-//         <div className="page--two pages">
-//           <button onClick={() => handleClickPage(1)}>close one</button>
-//         </div>
-//         <div className="page--thr pages">
-//           <button onClick={() => handleClickPage(2)}>close one</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

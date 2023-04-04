@@ -192,7 +192,7 @@ function TodoPage({ todo }) {
     );
   } else {
     return (
-      <div id={todo.id}>
+      <div id={todo.id} className="tasks__pages">
         <button>
           <IoChevronBackCircleSharp />
         </button>

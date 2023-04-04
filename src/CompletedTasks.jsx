@@ -1,6 +1,7 @@
 import { EnergyCost } from "./TodosPages";
 import { GrClose } from "react-icons/gr";
 import { toggleComplete } from "./BackLogs";
+import { bringThePage } from "./gsapAnime";
 
 export default function CompletedTasks({ todos }) {
   return (
@@ -20,7 +21,9 @@ export default function CompletedTasks({ todos }) {
         return (
           <div key={index} className="tasks">
             <span style={{ background: todo.priority }} className="tasks--priority"></span>
-            <span className="tasks--name">{todo.name}</span>
+            <button onClick={() => bringThePage("")}>
+              <span className="tasks--name">{todo.name}</span>
+            </button>
             <button onClick={() => toggleComplete(todo)} className="tasks--completeToggle">
               <GrClose size={20}/>
             </button>

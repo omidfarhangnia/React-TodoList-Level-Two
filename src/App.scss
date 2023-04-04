@@ -142,6 +142,11 @@ $mainFont: 'Roboto', sans-serif;
         height: 100%;
         margin: 0 auto;
     }
+    > button{
+        all: unset;
+        cursor: pointer;
+        margin: 0 15px;
+    }
     &--name{
         font-size: 1rem;
         text-transform: capitalize;
@@ -149,12 +154,18 @@ $mainFont: 'Roboto', sans-serif;
         font-family: $mainFont;
         display: flex;
         align-items: center;
+        padding: 4px 10px;
+        transition: 300ms;
+        border-radius: 5px;
+        &:hover{
+            background: $mainColor;
+        }
     }
     &--completeToggle{
         background: transparent;
         border: 0;
         polyline, path{
-            stroke: #ffffff;
+            stroke: $mainColor;
         }
     }
     &--thunders{
@@ -179,9 +190,9 @@ $mainFont: 'Roboto', sans-serif;
 .taskAdderContainer{
     width: 100vw;
     height: 100vh;
-    // position: fixed;
-    // top: 100vh;
-    // left: 0;
+    position: fixed;
+    top: 100vh;
+    left: 0;
     background-color: $mainBlack;
     form{
         width: 80%;
@@ -227,7 +238,9 @@ $mainFont: 'Roboto', sans-serif;
     }
 }
 
-.back__button{
+.backWard__btn{
     all: unset;
-    cursor: pointer;
+    path{
+        fill: $mainColor;
+    }
 }
