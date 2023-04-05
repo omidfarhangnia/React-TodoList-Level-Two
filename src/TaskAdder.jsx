@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {BsArrowLeftSquareFill} from "react-icons/bs";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { takeThePage } from "./gsapAnime";
 
 export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
@@ -13,9 +13,9 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
 
     if (isEnergyOn) {
       setActiveId(0);
-      onChangeValue(null, [false, false, false])
+      onChangeValue(null, [false, false, false]);
     } else {
-      onChangeValue(null, energyCost)
+      onChangeValue(null, energyCost);
       setActiveId(thunderId);
     }
   }
@@ -23,8 +23,11 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
   return (
     <div className="taskAdderContainer d-flex flex-column justify-content-around align-items-center">
       <div>
-        <button className="icons__style" onClick={() => takeThePage(".taskAdderContainer")}>
-          <BsArrowLeftSquareFill size={24}/>
+        <button
+          className="icons__style"
+          onClick={() => takeThePage(".taskAdderContainer")}
+        >
+          <BsArrowLeftSquareFill size={24} />
         </button>
         <h4 className="text-center text-mainBlue text-capitalize m-0">
           new note
@@ -87,14 +90,19 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
   );
 }
 
-export function ThunderIcon({ activeId, thunderId, onChangeActiveId, energyCost }) {
+export function ThunderIcon({
+  activeId,
+  thunderId,
+  onChangeActiveId,
+  energyCost,
+}) {
   if (thunderId <= activeId) {
     return (
       <span onClick={(e) => onChangeActiveId(thunderId, energyCost)}>
         <svg
-          width="20"
-          height="15"
-          viewBox="0 0 20 15"
+          width="40"
+          height="35"
+          viewBox="0 0 15 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -109,9 +117,9 @@ export function ThunderIcon({ activeId, thunderId, onChangeActiveId, energyCost 
     return (
       <span onClick={(e) => onChangeActiveId(thunderId, energyCost)}>
         <svg
-          width="20"
-          height="15"
-          viewBox="0 0 20 15"
+          width="40"
+          height="35"
+          viewBox="0 0 15 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

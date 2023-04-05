@@ -132,65 +132,82 @@ function TodoPage({ todo }) {
           onChange={(e) => {
             handleNewValue(e.target);
           }}
-          className=""
+          className="tasks__pages--header"
         />
-        <input
-          type="color"
-          name="priority"
-          value={currentValue.priority}
-          onChange={(e) => {
-            handleNewValue(e.target);
-          }}
-        />
-        <button
-          onClick={() => {
-            setIsEditing(false);
-            updateTodo(todo);
-          }}
-          className="icons__style"
-        >
-          <BsSave2 size={24} />
-        </button>
-        <button
-          onClick={() => {
-            setIsEditing(false);
-            setCurrentValue({
-              name: todo.name,
-              description: todo.description,
-              priority: todo.priority,
-              energyCosts: todo.energyCosts,
-            });
-          }}
-          className="icons__style PathNone"
-        >
-          <MdOutlineCancelPresentation size={24} />
-        </button>
+        <div className="tasks__pages--priority">
+          <input
+            type="color"
+            name="priority"
+            value={currentValue.priority}
+            onChange={(e) => {
+              handleNewValue(e.target);
+            }}
+          />
+        </div>
+        <div className="tasks__pages--save">
+          <button
+            onClick={() => {
+              setIsEditing(false);
+              updateTodo(todo);
+            }}
+            className="icons__style"
+          >
+            <BsSave2 size={24} />
+          </button>
+        </div>
+        <div className="tasks__pages--cancel">
+          <button
+            onClick={() => {
+              setIsEditing(false);
+              setCurrentValue({
+                name: todo.name,
+                description: todo.description,
+                priority: todo.priority,
+                energyCosts: todo.energyCosts,
+              });
+            }}
+            className="icons__style PathNone"
+          >
+            <MdOutlineCancelPresentation size={24} />
+          </button>
+        </div>
+        <div className="tasks__pages--ComToggle">
+          <button
+            onClick={() => toggleComplete(todo)}
+            className="statusIcons__style"
+          >
+            {todo.completed ? <GrClose size={24} /> : <GrCheckmark size={24} />}
+          </button>
+        </div>
         <textarea
           name="description"
           value={currentValue.description}
           onChange={(e) => {
             handleNewValue(e.target);
           }}
+          className="tasks__pages--description"
         />
-        <div>
-          <ThunderIcon
-            thunderId={1}
-            activeId={activeId}
-            onChangeActiveId={handleChangeActiveId}
-            energyCost={[true, false, false]}
-          />
-          <ThunderIcon
-            thunderId={2}
-            activeId={activeId}
-            onChangeActiveId={handleChangeActiveId}
-            energyCost={[true, true, false]}
-          />
-          <ThunderIcon
-            thunderId={3}
-            activeId={activeId}
-            onChangeActiveId={handleChangeActiveId}
-            energyCost={[true, true, true]}
-          />
+        <div className="tasks__pages--thunderEdited">
+          <span>
+            <ThunderIcon
+              thunderId={1}
+              activeId={activeId}
+              onChangeActiveId={handleChangeActiveId}
+              energyCost={[true, false, false]}
+            />
+            <ThunderIcon
+              thunderId={2}
+              activeId={activeId}
+              onChangeActiveId={handleChangeActiveId}
+              energyCost={[true, true, false]}
+            />
+            <ThunderIcon
+              thunderId={3}
+              activeId={activeId}
+              onChangeActiveId={handleChangeActiveId}
+              energyCost={[true, true, true]}
+            />
+          </span>
         </div>
       </div>
     );
@@ -210,10 +227,7 @@ function TodoPage({ todo }) {
           <div style={{ background: todo.priority }}></div>
         </div>
         <div className=" tasks__pages--edit">
-          <button
-            onClick={() => setIsEditing(true)}
-            className="icons__style"
-          >
+          <button onClick={() => setIsEditing(true)} className="icons__style">
             <FiEdit size={24} />
           </button>
         </div>
