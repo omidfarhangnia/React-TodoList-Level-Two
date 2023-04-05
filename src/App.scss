@@ -247,7 +247,7 @@ $mainFont: 'Roboto', sans-serif;
 
 .statusIcons__style{
     all: unset;
-    polyline{
+    polyline, path{
         stroke: $mainColor;
     }
 }
@@ -276,5 +276,58 @@ $mainFont: 'Roboto', sans-serif;
     background-blend-mode: color-dodge;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-rows: 5fr 2fr 6fr;
+    > *{
+        display: grid;
+        place-items: center;
+    }
+    &--back{
+        grid-column: 1 / 2;
+    }
+    &--header{
+        grid-column: 2 / 5;
+        font-size: 8vw;
+        font-family: $mainFont;
+        color: #ffffff;
+        text-transform: capitalize;
+    }
+    &--priority{
+        grid-column: 5 / 6;
+        > div{
+            width: 80%;
+            max-width: 130px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+        }
+    }
+    &--edit{
+        grid-column: 1 / 3;
+    }
+    &--delete{
+        grid-column: 3 / 4;
+    }
+    &--ComToggle{
+        grid-column: 4 / 6;
+    }
+    &--description{
+        grid-column: 1 / 3;
+        font-size: 1.2rem;
+        color: #ffffff;
+        font-family: $mainFont;
+        text-transform: capitalize;
+        text-align: justify;
+        font-size: 1.1rem;
+        border: 1px solid #ffffff;
+        border-radius: 30px;
+    }
+    &--thunder{
+        grid-column: 4 / 6;
+        display: flex;
+        justify-content: center;
+        > span{
+            border: 2px solid #ffffff;
+            padding: 15px 15px 5px 15px;
+            border-radius: 40px;
+        }
+    }
 }

@@ -16,9 +16,9 @@ export function EnergyCost({ isOn }) {
   if (isOn) {
     return (
       <svg
-        width="20"
-        height="15"
-        viewBox="0 0 20 15"
+        width="40"
+        height="35"
+        viewBox="0 0 15 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -31,9 +31,9 @@ export function EnergyCost({ isOn }) {
   } else {
     return (
       <svg
-        width="20"
-        height="15"
-        viewBox="0 0 20 15"
+        width="40"
+        height="35"
+        viewBox="0 0 15 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -125,6 +125,23 @@ function TodoPage({ todo }) {
   if (isEditing) {
     return (
       <div id={todo.id} className="tasks__pages">
+        <input
+          type="text"
+          name="name"
+          value={currentValue.name}
+          onChange={(e) => {
+            handleNewValue(e.target);
+          }}
+          className=""
+        />
+        <input
+          type="color"
+          name="priority"
+          value={currentValue.priority}
+          onChange={(e) => {
+            handleNewValue(e.target);
+          }}
+        />
         <button
           onClick={() => {
             setIsEditing(false);
@@ -132,7 +149,7 @@ function TodoPage({ todo }) {
           }}
           className="icons__style"
         >
-          <BsSave2 size={24}/>
+          <BsSave2 size={24} />
         </button>
         <button
           onClick={() => {
@@ -146,27 +163,11 @@ function TodoPage({ todo }) {
           }}
           className="icons__style PathNone"
         >
-          <MdOutlineCancelPresentation size={24}/>
+          <MdOutlineCancelPresentation size={24} />
         </button>
-        <input
-          type="text"
-          name="name"
-          value={currentValue.name}
-          onChange={(e) => {
-            handleNewValue(e.target);
-          }}
-        />
         <textarea
           name="description"
           value={currentValue.description}
-          onChange={(e) => {
-            handleNewValue(e.target);
-          }}
-        />
-        <input
-          type="color"
-          name="priority"
-          value={currentValue.priority}
           onChange={(e) => {
             handleNewValue(e.target);
           }}
@@ -196,30 +197,54 @@ function TodoPage({ todo }) {
   } else {
     return (
       <div id={todo.id} className="tasks__pages">
-        <button onClick={() => takeThePage(`#${todo.id}`)} className="icons__style">
-          <BsArrowLeftSquareFill size={24} />
-        </button>
-        <h2>{todo.name}</h2>
-        <div style={{background: todo.priority}}></div>
-        <button onClick={() => setIsEditing(true)} className="icons__style">
-          <FiEdit size={24}/>
-        </button>
-        <button onClick={() => {
-          takeThePage(`#${todo.id}`);
-          deleteTodo(todo);
-        }}
-        className="icons__style PathNone"
-        >
-          <RiDeleteBin6Line size={24}/>
-        </button>
-        <button onClick={() => toggleComplete(todo)} className="statusIcons__style">
-          {todo.completed ? <GrClose size={24} /> : <GrCheckmark size={24} />}
-        </button>
-        {todo.description && <p>{todo.description}</p>}
-        <span>
-          {Thunder__icons.map((icon, index) => (
-            <span key={index}>{icon}</span>
-          ))}
+        <div className="tasks__pages--back">
+          <button
+            onClick={() => takeThePage(`#${todo.id}`)}
+            className="icons__style"
+          >
+            <BsArrowLeftSquareFill size={24} />
+          </button>
+        </div>
+        <h2 className="tasks__pages--header">{todo.name}</h2>
+        <div className="tasks__pages--priority">
+          <div style={{ background: todo.priority }}></div>
+        </div>
+        <div className=" tasks__pages--edit">
+          <button
+            onClick={() => setIsEditing(true)}
+            className="icons__style"
+          >
+            <FiEdit size={24} />
+          </button>
+        </div>
+        <div className="tasks__pages--delete">
+          <button
+            onClick={() => {
+              takeThePage(`#${todo.id}`);
+              deleteTodo(todo);
+            }}
+            className="icons__style PathNone"
+          >
+            <RiDeleteBin6Line size={24} />
+          </button>
+        </div>
+        <div className="tasks__pages--ComToggle">
+          <button
+            onClick={() => toggleComplete(todo)}
+            className="statusIcons__style"
+          >
+            {todo.completed ? <GrClose size={24} /> : <GrCheckmark size={24} />}
+          </button>
+        </div>
+        {todo.description && (
+          <p className="tasks__pages--description">{todo.description}</p>
+        )}
+        <span className="tasks__pages--thunder">
+          <span>
+            {Thunder__icons.map((icon, index) => (
+              <span key={index}>{icon}</span>
+            ))}
+          </span>
         </span>
       </div>
     );
