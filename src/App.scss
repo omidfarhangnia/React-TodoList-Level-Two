@@ -42,6 +42,23 @@ $mainFont: 'Roboto', sans-serif;
 
 // page style
 
+::-webkit-scrollbar{
+    width: 10px;
+    background: $mainBlack;
+}
+
+::-webkit-scrollbar-track{
+    width: 10px;
+    border-radius: 5px;
+    background: $mainBlack;
+}
+
+::-webkit-scrollbar-thumb{
+    width: 10px;
+    border-radius: 5px;
+    background: $mainColor;
+}
+
 .todoContainer{
     width: 100%;
     min-height: 100vh;
