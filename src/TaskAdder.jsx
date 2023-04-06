@@ -38,8 +38,9 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
           name
           <input
             type={"text"}
-            value={newValue.name}
             name="name"
+            value={newValue.name}
+            spellCheck="false"
             onChange={(e) => onChangeValue(e.target)}
           />
         </label>
@@ -49,6 +50,7 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
           <textarea
             value={newValue.description}
             name="description"
+            spellCheck="false"
             onChange={(e) => onChangeValue(e.target)}
           />
         </label>
@@ -62,7 +64,7 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
           />
         </label>
         <label>
-          energy costs.
+          energy costs
           <ThunderIcon
             thunderId={1}
             activeId={activeId}
@@ -83,7 +85,10 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
           />
         </label>
       </form>
-      <button className="border-0 colorFul__btn" onClick={createTodo}>
+      <button className="border-0 colorFul__btn" onClick={() => {
+        setActiveId(0);
+        createTodo();
+      }}>
         add
       </button>
     </div>

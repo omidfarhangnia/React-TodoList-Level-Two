@@ -36,6 +36,7 @@ export default function App() {
     energyCosts: [false, false, false],
   });
   const container = useRef();
+  // const activeId = useRef(0);
 
   // read from database
   useEffect(() => {
@@ -161,17 +162,19 @@ function CurrentTask({ todos }) {
     return "";
   } else {
     let currentTaskName = null;
+    let currentTaskId = null;
 
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].completed === false) {
         currentTaskName = todos[i].name;
+        currentTaskId = `#${todos[i].id}`;
         break;
       }
     }
 
     return (
       <div className="currentTask__container d-flex justify-content-center">
-        <button className="colorFul__btn">
+        <button className="colorFul__btn" onClick={() => bringThePage(currentTaskId)}>
           {currentTaskName === null ? "all tasks completed" : currentTaskName}
         </button>
       </div>

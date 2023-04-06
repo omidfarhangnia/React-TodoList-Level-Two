@@ -129,6 +129,7 @@ function TodoPage({ todo }) {
           type="text"
           name="name"
           value={currentValue.name}
+          spellCheck="false"
           onChange={(e) => {
             handleNewValue(e.target);
           }}
@@ -182,6 +183,7 @@ function TodoPage({ todo }) {
         <textarea
           name="description"
           value={currentValue.description}
+          spellCheck="false"
           onChange={(e) => {
             handleNewValue(e.target);
           }}
@@ -234,7 +236,9 @@ function TodoPage({ todo }) {
         <div className="tasks__pages--delete">
           <button
             onClick={() => {
-              deleteAnime(todo.id, () => {deleteTodo(todo)});
+              deleteAnime(todo.id, () => {
+                deleteTodo(todo);
+              });
             }}
             className="icons__style PathNone"
           >
