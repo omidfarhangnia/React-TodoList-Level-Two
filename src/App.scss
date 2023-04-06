@@ -297,8 +297,11 @@ $mainFont: 'Roboto', sans-serif;
         transition: border 300ms;
         text-align: center;
     }
-    &--header:focus-visible{
+    &--headerEdited{
         outline: none;
+        border: 2px solid #ffffff;
+    }
+    &--header:focus-visible{
         border: 2px solid $mainColor;
     }
     &--priority{
@@ -334,6 +337,7 @@ $mainFont: 'Roboto', sans-serif;
         resize: none;
         text-align: center;
         padding: 10% 2%;
+        transition: border 300ms;
     }
     &--description:focus-visible{
         outline: none;

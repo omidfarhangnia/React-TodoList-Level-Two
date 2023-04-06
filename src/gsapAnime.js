@@ -26,6 +26,15 @@ const takeAnime = (pageClassName) => {
   });
 }
 
+export const deleteAnime = (todoId, callback) => {
+  gsap.to(`#${todoId}`, {
+    opacity: 0,
+    duration: .7,
+    ease: "expo.out",
+    onComplete: () => {callback()}
+  })
+}
+
 export function bringThePage(pageClassName) {
   if (pageAnimations !== undefined) {
     if (!pageAnimations.isActive) {

@@ -10,7 +10,7 @@ import { MdOutlineCancelPresentation } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrCheckmark } from "react-icons/gr";
 import { GrClose } from "react-icons/gr";
-import { takeThePage } from "./gsapAnime";
+import { takeThePage, deleteAnime } from "./gsapAnime";
 
 export function EnergyCost({ isOn }) {
   if (isOn) {
@@ -132,7 +132,7 @@ function TodoPage({ todo }) {
           onChange={(e) => {
             handleNewValue(e.target);
           }}
-          className="tasks__pages--header"
+          className="tasks__pages--header tasks__pages--headerEdited"
         />
         <div className="tasks__pages--priority">
           <input
@@ -234,8 +234,7 @@ function TodoPage({ todo }) {
         <div className="tasks__pages--delete">
           <button
             onClick={() => {
-              takeThePage(`#${todo.id}`);
-              deleteTodo(todo);
+              deleteAnime(todo.id, () => {deleteTodo(todo)});
             }}
             className="icons__style PathNone"
           >
