@@ -56,9 +56,22 @@ export default function TodosPages({ todos, handleNewValue }) {
   );
 }
 
+function giveCurrentActiveThunder(energyCost) {
+  let currentThunderId = 0;
+  for(var i = 0; i < energyCost.length; i++){
+    if(energyCost[i] !== true){
+      break;
+    }
+
+    currentThunderId = i + 1;
+  }
+
+  return currentThunderId;
+}
+
 function TodoPage({ todo }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [activeId, setActiveId] = useState(0);
+  const [activeId, setActiveId] = useState(giveCurrentActiveThunder(todo.energyCosts));
   const [isEnergyOn, setIsEnergyOn] = useState(false);
   const [currentValue, setCurrentValue] = useState({
     name: todo.name,
@@ -96,15 +109,6 @@ function TodoPage({ todo }) {
   }
 
   const updateTodo = async (todo) => {
-    // if there is any change
-    if (
-      currentValue.name === todo.name &&
-      currentValue.description === todo.description &&
-      currentValue.priority === todo.priority
-    ) {
-      return;
-    }
-
     await updateDoc(doc(db, "todos", todo.id), {
       name: currentValue.name,
       description: currentValue.description,

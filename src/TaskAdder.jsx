@@ -96,8 +96,8 @@ export default function TaskAdder({ newValue, onChangeValue, createTodo }) {
 }
 
 export function ThunderIcon({
-  activeId,
   thunderId,
+  activeId,
   onChangeActiveId,
   energyCost,
 }) {

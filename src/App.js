@@ -36,7 +36,6 @@ export default function App() {
     energyCosts: [false, false, false],
   });
   const container = useRef();
-  // const activeId = useRef(0);
 
   // read from database
   useEffect(() => {
