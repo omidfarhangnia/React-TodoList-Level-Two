@@ -5,8 +5,9 @@ let pageAnimations;
 const bringAnime = (pageClassName) => {
   pageAnimations = gsap.to(`${pageClassName}`, {
     y: "-100vh",
-    duration: 1,
-    ease: "linear",
+    duration: .55,
+    delay: .2,
+    ease: "power4.out",
     onComplete: () => {
       pageAnimations = undefined;
     },
@@ -16,8 +17,9 @@ const bringAnime = (pageClassName) => {
 const takeAnime = (pageClassName) => {
   pageAnimations = gsap.to(`${pageClassName}`, {
     y: "0",
-    duration: 1,
-    ease: "linear",
+    duration: .55,
+    delay: .2,
+    ease: "power4.out",
     onComplete: () => {
       pageAnimations = undefined;
     },
