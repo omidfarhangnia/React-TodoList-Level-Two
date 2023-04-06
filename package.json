@@ -16,6 +16,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,7 +41,9 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "gsap": "^3.11.5",
     "react-icons": "^4.8.0"
-  }
+  },
+  "homepage": "http://omidfarhangnia.github.io/React-TodoList-Level-Two"
 }
